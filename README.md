@@ -2,6 +2,10 @@
 ```
 $ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer --version=1.0.0-alpha11
 
+--With HHVM
+
+$ curl -sS https://getcomposer.org/installer | sudo hhvm --php -dHttp.SlowQueryThreshold=30000 -- --install-dir=/usr/local/bin --filename=composer --version=1.0.0-alpha11
+
 $ composer global require "fxp/composer-asset-plugin:*"
 
 $config['modules']['gii'] = [

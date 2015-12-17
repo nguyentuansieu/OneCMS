@@ -17,7 +17,13 @@
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.6",
         "yiisoft/yii2-bootstrap": "*",
-        "yiisoft/yii2-swiftmailer": "*"
+        "yiisoft/yii2-swiftmailer": "*",
+        "creocoder/yii2-nested-sets": "^0.9.0",
+        "zhuravljov/yii2-datetime-widgets": "^1.0",
+        "mihaildev/yii2-elfinder": "^1.1",
+        "mihaildev/yii2-ckeditor": "^1.0",
+        "omnilight/yii2-shopping-cart": "^1.2",
+        "yii2mod/yii2-selectize": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
