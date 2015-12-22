@@ -28,34 +28,37 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => HTML::img('@web/img/logo.png'),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar-default onecms-header navbar-fixed-top',
         ],
     ]);
+    echo '<div class="navbar-form onecms-hotline navbar-right">
+            <button class="btn btn-danger">0943 668 716</button>
+          </div>
+        ';
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+        ['label' => 'Trang chủ', 'url' => ['/site/index']],
+        ['label' => 'Giới thiệu', 'url' => ['/site/about']],
+        ['label' => 'Sản phẩm', 'url' => ['/product/index']],
+        ['label' => 'Blogs', 'url' => ['/blog/index']],
+        ['label' => 'Liên hệ', 'url' => ['/site/contact']],
     ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link']
-            )
-            . Html::endForm()
-            . '</li>';
+    if (!Yii::$app->user->isGuest)
+    {
+        $menuItems[] = [
+            'label' => 'Thoát (' . Yii::$app->user->identity->username . ')',
+            'url' => ['/site/logout'],
+            'linkOptions' => ['data-method' => 'post']
+        ];
     }
+
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
+        'options' => ['class' => 'onecms-nav navbar-nav navbar-right'],
         'items' => $menuItems,
     ]);
+
     NavBar::end();
     ?>
 
@@ -64,8 +67,8 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <?= $content ?>
     </div>
+    <?= $content ?>
 </div>
 
 <footer class="footer">
@@ -75,7 +78,31 @@ AppAsset::register($this);
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
+<a class="back-to-top" style="display: inline;"><i class="fa fa-angle-up"></i></a>
 
+<?php
+$js = "
+jQuery(document).ready(function() {
+var offset = 220;
+var duration = 500;
+jQuery(window).scroll(function() {
+if (jQuery(this).scrollTop() > offset) {
+jQuery('.back-to-top').fadeIn(duration);
+} else {
+jQuery('.back-to-top').fadeOut(duration);
+}
+});
+jQuery('.back-to-top').click(function(event) {
+event.preventDefault();
+jQuery('html, body').animate({
+scrollTop: 0
+}, duration);
+return false;
+})
+});
+";
+$this->registerJs($js, 3);
+?>
 <?php $this->endBody() ?>
 </body>
 </html>

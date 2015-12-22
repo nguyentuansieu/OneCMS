@@ -18,12 +18,17 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'css/owl.carousel.css',
+        'css/owl.transitions.css',
+        'css/owl.theme.css',
         'css/site.css',
     ];
     public $js = [
+        'js/owl.carousel.min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+        'onecms\adminlte\FontAwesomeAssets'
     ];
 }

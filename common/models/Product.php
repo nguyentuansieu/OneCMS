@@ -73,7 +73,7 @@ class Product extends \yii\db\ActiveRecord
             [['meta_title'], 'string', 'max' => 70],
             [['meta_description'], 'string', 'max' => 160],
             [['video'], 'string', 'max' => 100],
-            [['sku'], 'string', 'max' => 11],
+            [['sku'], 'string', 'max' => 50],
         ];
     }
 
