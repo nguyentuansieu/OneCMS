@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50546
 File Encoding         : 65001
 
-Date: 2015-12-22 16:39:25
+Date: 2015-12-22 16:44:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -311,11 +311,12 @@ CREATE TABLE `product` (
   KEY `idx_category_id` (`category_id`),
   KEY `idx_title` (`title`) USING BTREE,
   KEY `idx_slug` (`slug`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of product
 -- ----------------------------
+INSERT INTO `product` VALUES ('1', '1', 'Sản phẩm Bio Tech', 'san-pham-bio-tech', '/uploads/slideshow/2.jpg', '/uploads/slideshow/2.jpg, /uploads/slideshow/3.jpg, /uploads/slideshow/4.jpg, /uploads/slideshow/5.jpg', 'aaa', null, '1000000', null, '72g4Zkexu3E', null, '<p>aa</p>\r\n', '<p>aa</p>\r\n', '<p>aaa</p>\r\n', null, '', '', '', '10', '1', '1', '1450777213', '1450777213');
 
 -- ----------------------------
 -- Table structure for `setting`
