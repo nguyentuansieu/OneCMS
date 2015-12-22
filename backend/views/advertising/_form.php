@@ -15,7 +15,7 @@ use zhuravljov\widgets\DatePicker;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'position')->textInput(['value' => 'slideshow', 'maxlength' => true]) ?>
+    <?= $form->field($model, 'position')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'start_date')->widget(DatePicker::className(), [
         'clientOptions' => [
@@ -48,7 +48,7 @@ use zhuravljov\widgets\DatePicker;
         'multiple'      => false
     ]) ?>
 
-    <?= $form->field($model, 'link')->textInput(['value' => '#', 'maxlength' => true]) ?>
+    <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'published')->textInput(['value' => 10]) ?>
 
