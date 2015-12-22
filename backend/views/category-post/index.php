@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'meta_keywords',
             // 'meta_description',
             // 'meta_params:ntext',
-            // 'published',
+             'published',
             // 'layouts',
             // 'views',
             // 'created_by',

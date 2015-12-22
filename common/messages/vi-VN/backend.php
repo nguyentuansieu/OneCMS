@@ -78,4 +78,5 @@ return [
     'Update Setting' => 'Cập nhật',
     'Updated At' => 'Cập nhật ngày',
     'Updated By' => 'Cập nhật bởi',
+    'Specification' => 'Thông số kỹ thuật',
 ];

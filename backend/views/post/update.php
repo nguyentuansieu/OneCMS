@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = Yii::t('backend', 'Update');
 
     <?= $this->render('_form', [
         'model' => $model,
+        'treeParents' => $treeParents,
     ]) ?>
 
 </div>

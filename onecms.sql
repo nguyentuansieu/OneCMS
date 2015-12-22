@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50546
 File Encoding         : 65001
 
-Date: 2015-12-22 10:04:31
+Date: 2015-12-22 16:39:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,16 +27,24 @@ CREATE TABLE `advertising` (
   `end_date` datetime DEFAULT NULL,
   `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `link` varchar(255) COLLATE utf8_unicode_ci DEFAULT '#',
+  `published` tinyint(4) DEFAULT '10',
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`id`),
+  KEY `idx_start_date` (`start_date`),
+  KEY `idx_end_date` (`end_date`),
+  KEY `idx_start_end_date` (`start_date`,`end_date`),
+  KEY `idx_position` (`position`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of advertising
 -- ----------------------------
+INSERT INTO `advertising` VALUES ('1', 'sl1', 'slideshow', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '/uploads/slideshow/1.jpg', '#', '10', '1', '1', '1450754123', '1450754123');
+INSERT INTO `advertising` VALUES ('2', 'sl2', 'slideshow', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '/uploads/slideshow/2.jpg', '#', '10', '1', '1', '1450754280', '1450754302');
+INSERT INTO `advertising` VALUES ('3', 'sl3', 'slideshow', null, null, '/uploads/slideshow/3.jpg', '#', '10', '1', '1', '1450754294', '1450754294');
 
 -- ----------------------------
 -- Table structure for `auth_assignment`
@@ -124,9 +132,9 @@ CREATE TABLE `category_post` (
   `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `content` mediumtext COLLATE utf8_unicode_ci,
-  `meta_title` varchar(0) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_title` varchar(70) COLLATE utf8_unicode_ci DEFAULT NULL,
   `meta_keywords` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `meta_description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_description` varchar(160) COLLATE utf8_unicode_ci DEFAULT NULL,
   `meta_params` text COLLATE utf8_unicode_ci,
   `published` tinyint(4) DEFAULT NULL,
   `layouts` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -136,12 +144,20 @@ CREATE TABLE `category_post` (
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `idx_title_slug` (`title`,`slug`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `idx_title` (`title`) USING BTREE,
+  KEY `idx_slug` (`slug`),
+  KEY `idx_lft` (`lft`),
+  KEY `idx_lft_rgt` (`lft`,`rgt`),
+  KEY `idx_id_lft_rgt` (`id`,`lft`,`rgt`),
+  KEY `idx_parent_id` (`parent_id`),
+  KEY `idx_tree_lft` (`tree`,`lft`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of category_post
 -- ----------------------------
+INSERT INTO `category_post` VALUES ('1', null, '1', '1', '2', '0', 'Tin tức', 'tin-tuc', '', '', '', '', '', null, '10', null, null, '1', '1', '1450760543', '1450760543');
+INSERT INTO `category_post` VALUES ('2', null, '2', '1', '2', '0', 'Sự kiện', 'su-kien', '', '', '', '', '', null, '10', null, null, '1', '1', '1450760603', '1450765458');
 
 -- ----------------------------
 -- Table structure for `category_product`
@@ -158,9 +174,9 @@ CREATE TABLE `category_product` (
   `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `content` mediumtext COLLATE utf8_unicode_ci,
-  `meta_title` varchar(0) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_title` varchar(70) COLLATE utf8_unicode_ci DEFAULT NULL,
   `meta_keywords` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `meta_description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_description` varchar(160) COLLATE utf8_unicode_ci DEFAULT NULL,
   `meta_params` text COLLATE utf8_unicode_ci,
   `published` tinyint(4) DEFAULT NULL,
   `layouts` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -170,12 +186,19 @@ CREATE TABLE `category_product` (
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `idx_title_slug` (`title`,`slug`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `idx_title` (`title`) USING BTREE,
+  KEY `idx_slug` (`slug`) USING BTREE,
+  KEY `idx_lft` (`lft`) USING BTREE,
+  KEY `idx_lft_rgt` (`lft`,`rgt`) USING BTREE,
+  KEY `idx_id_lft_rgt` (`id`,`lft`,`rgt`) USING BTREE,
+  KEY `idx_parent_id` (`parent_id`) USING BTREE,
+  KEY `idx_tree_lft` (`tree`,`lft`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of category_product
 -- ----------------------------
+INSERT INTO `category_product` VALUES ('1', null, '1', '1', '2', '0', 'Sản phẩm', 'san-pham', '', '', '', '', '', null, '10', null, null, '1', '1', '1450765903', '1450768865');
 
 -- ----------------------------
 -- Table structure for `migration`
@@ -203,9 +226,9 @@ CREATE TABLE `page` (
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `content` mediumtext COLLATE utf8_unicode_ci,
-  `meta_title` varchar(0) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_title` varchar(70) COLLATE utf8_unicode_ci DEFAULT NULL,
   `meta_keywords` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `meta_description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_description` varchar(160) COLLATE utf8_unicode_ci DEFAULT NULL,
   `meta_params` text COLLATE utf8_unicode_ci,
   `published` tinyint(4) DEFAULT NULL,
   `layouts` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -215,12 +238,14 @@ CREATE TABLE `page` (
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `idx_title_slug` (`title`,`slug`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `idx_title` (`title`) USING BTREE,
+  KEY `idx_slug` (`slug`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of page
 -- ----------------------------
+INSERT INTO `page` VALUES ('1', 'Giới thiệu', 'gioi-thieu', '', '', '', '', null, '10', null, null, '1', '1', '1450769510', '1450769510');
 
 -- ----------------------------
 -- Table structure for `post`
@@ -234,22 +259,24 @@ CREATE TABLE `post` (
   `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `content` mediumtext COLLATE utf8_unicode_ci,
   `meta_params` text COLLATE utf8_unicode_ci,
-  `meta_title` varchar(0) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_title` varchar(70) COLLATE utf8_unicode_ci DEFAULT NULL,
   `meta_keywords` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `meta_description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_description` varchar(160) COLLATE utf8_unicode_ci DEFAULT NULL,
   `published` tinyint(4) DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `idx_title_slug` (`title`,`slug`),
-  KEY `idx_category_id` (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `idx_category_id` (`category_id`),
+  KEY `idx_title` (`title`) USING BTREE,
+  KEY `idx_slug` (`slug`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of post
 -- ----------------------------
+INSERT INTO `post` VALUES ('1', '1', 'Nội dung test thử', 'noi-dung-test-thu', '/uploads/slideshow/8.jpg', '', null, '', '', '', '10', '1', '1', '1450769617', '1450769617');
 
 -- ----------------------------
 -- Table structure for `product`
@@ -262,24 +289,28 @@ CREATE TABLE `product` (
   `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `images` tinytext COLLATE utf8_unicode_ci,
-  `sku` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sku` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `quantity` int(11) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
   `discount` int(11) DEFAULT NULL,
+  `video` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `download` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `summary` tinytext COLLATE utf8_unicode_ci,
   `content` mediumtext COLLATE utf8_unicode_ci,
+  `specification` text COLLATE utf8_unicode_ci,
   `meta_params` text COLLATE utf8_unicode_ci,
-  `meta_title` varchar(0) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_title` varchar(70) COLLATE utf8_unicode_ci DEFAULT NULL,
   `meta_keywords` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `meta_description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_description` varchar(160) COLLATE utf8_unicode_ci DEFAULT NULL,
   `published` tinyint(4) DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `idx_title_slug` (`title`,`slug`),
-  KEY `idx_category_id` (`category_id`)
+  KEY `idx_category_id` (`category_id`),
+  KEY `idx_title` (`title`) USING BTREE,
+  KEY `idx_slug` (`slug`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------

@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\onecms\TreeHelper;
 use Yii;
 use common\models\CategoryProduct;
 use backend\models\CategoryProductSearch;
@@ -64,12 +65,19 @@ class CategoryProductController extends Controller
     public function actionCreate()
     {
         $model = new CategoryProduct();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $treeParents = TreeHelper::build($model->find()->addOrderBy('tree')->addOrderBy('lft')->all());
+        if ($model->load(Yii::$app->request->post())) {
+            if(empty($model->parent_id)) {
+                $model->makeRoot();
+            } else {
+                $root = $model->findOne(['id' => $model->parent_id]);
+                $model->appendTo($root);
+            }
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'treeParents' => $treeParents,
             ]);
         }
     }
@@ -83,12 +91,19 @@ class CategoryProductController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $treeParents = TreeHelper::build($model->find()->addOrderBy('tree')->addOrderBy('lft')->all());
+        if ($model->load(Yii::$app->request->post())) {
+            if(empty($model->parent_id)) {
+                ($model->isRoot()) ? $model->save() : $model->makeRoot();
+            } else {
+                $root = $model->findOne(['id' => $model->parent_id]);
+                $model->appendTo($root);
+            }
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'treeParents' => $treeParents,
             ]);
         }
     }

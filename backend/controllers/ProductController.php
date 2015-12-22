@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use common\models\CategoryProduct;
+use common\onecms\TreeHelper;
 use Yii;
 use common\models\Product;
 use backend\models\ProductSearch;
@@ -64,12 +66,14 @@ class ProductController extends Controller
     public function actionCreate()
     {
         $model = new Product();
-
+        $categoryModel = new CategoryProduct();
+        $treeParents = TreeHelper::build($categoryModel->find()->addOrderBy('tree')->addOrderBy('lft')->all());
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'treeParents' => $treeParents,
             ]);
         }
     }
@@ -83,12 +87,14 @@ class ProductController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $categoryModel = new CategoryProduct();
+        $treeParents = TreeHelper::build($categoryModel->find()->addOrderBy('tree')->addOrderBy('lft')->all());
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'treeParents' => $treeParents,
             ]);
         }
     }

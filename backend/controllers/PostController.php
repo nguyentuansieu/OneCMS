@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use common\models\CategoryPost;
+use common\onecms\TreeHelper;
 use Yii;
 use common\models\Post;
 use backend\models\PostSearch;
@@ -64,12 +66,14 @@ class PostController extends Controller
     public function actionCreate()
     {
         $model = new Post();
-
+        $categoryModel = new CategoryPost();
+        $treeParents = TreeHelper::build($categoryModel->find()->addOrderBy('tree')->addOrderBy('lft')->all());
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'treeParents' => $treeParents,
             ]);
         }
     }
@@ -83,12 +87,14 @@ class PostController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $categoryModel = new CategoryPost();
+        $treeParents = TreeHelper::build($categoryModel->find()->addOrderBy('tree')->addOrderBy('lft')->all());
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'treeParents' => $treeParents,
             ]);
         }
     }

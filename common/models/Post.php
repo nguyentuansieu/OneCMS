@@ -42,7 +42,7 @@ class Post extends \yii\db\ActiveRecord
         return [
             [
                 'class' => SluggableBehavior::className(),
-                'attribute' => 'slug',
+                'attribute' => ['title', 'slug'],
                 'slugAttribute' => 'slug',
                 'ensureUnique' => true,
             ],
@@ -62,8 +62,10 @@ class Post extends \yii\db\ActiveRecord
         return [
             [['category_id', 'title', 'image'], 'required'],
             [['category_id', 'published', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
-            [['content', 'meta_params', 'meta_title'], 'string'],
-            [['title', 'slug', 'image', 'meta_keywords', 'meta_description'], 'string', 'max' => 255],
+            [['content', 'meta_params'], 'string'],
+            [['title', 'slug', 'image', 'meta_keywords'], 'string', 'max' => 255],
+            [['meta_title'], 'string', 'max' => 70],
+            [['meta_description'], 'string', 'max' => 160],
         ];
     }
 

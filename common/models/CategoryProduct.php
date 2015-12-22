@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\SluggableBehavior;
+use creocoder\nestedsets\NestedSetsBehavior;
 /**
  * This is the model class for table "category_product".
  *
@@ -48,7 +49,7 @@ class CategoryProduct extends \yii\db\ActiveRecord
         return [
             [
                 'class' => SluggableBehavior::className(),
-                'attribute' => 'slug',
+                'attribute' => ['title', 'slug'],
                 'slugAttribute' => 'slug',
                 'ensureUnique' => true,
             ],
@@ -57,7 +58,14 @@ class CategoryProduct extends \yii\db\ActiveRecord
             ],
             [
                 'class' => BlameableBehavior::className(),
-            ]
+            ],
+            'tree' => [
+                'class' => NestedSetsBehavior::className(),
+                'treeAttribute' => 'tree',
+                'leftAttribute' => 'lft',
+                'rightAttribute' => 'rgt',
+                'depthAttribute' => 'depth',
+            ],
         ];
     }
     /**
@@ -68,9 +76,11 @@ class CategoryProduct extends \yii\db\ActiveRecord
         return [
             [['parent_id', 'tree', 'lft', 'rgt', 'depth', 'published', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
             [['title'], 'required'],
-            [['content', 'meta_title', 'meta_params'], 'string'],
-            [['title', 'slug', 'image', 'meta_keywords', 'meta_description'], 'string', 'max' => 255],
+            [['content', 'meta_params'], 'string'],
+            [['title', 'slug', 'image', 'meta_keywords'], 'string', 'max' => 255],
             [['layouts', 'views'], 'string', 'max' => 100],
+            [['meta_title'], 'string', 'max' => 70],
+            [['meta_description'], 'string', 'max' => 160],
         ];
     }
 
@@ -111,5 +121,12 @@ class CategoryProduct extends \yii\db\ActiveRecord
     public static function find()
     {
         return new CategoryProductQuery(get_called_class());
+    }
+
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_ALL,
+        ];
     }
 }

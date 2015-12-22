@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50546
 File Encoding         : 65001
 
-Date: 2015-12-22 02:16:59
+Date: 2015-12-22 14:23:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,19 +23,98 @@ CREATE TABLE `advertising` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `position` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `start_date` int(11) DEFAULT NULL,
-  `end_date` int(11) DEFAULT NULL,
+  `start_date` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL,
   `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `link` varchar(255) COLLATE utf8_unicode_ci DEFAULT '#',
+  `published` tinyint(4) DEFAULT '10',
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`id`),
+  KEY `idx_start_date` (`start_date`),
+  KEY `idx_end_date` (`end_date`),
+  KEY `idx_start_end_date` (`start_date`,`end_date`),
+  KEY `idx_position` (`position`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of advertising
+-- ----------------------------
+INSERT INTO `advertising` VALUES ('1', 'sl1', 'slideshow', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '/uploads/slideshow/1.jpg', '#', '10', '1', '1', '1450754123', '1450754123');
+INSERT INTO `advertising` VALUES ('2', 'sl2', 'slideshow', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '/uploads/slideshow/2.jpg', '#', '10', '1', '1', '1450754280', '1450754302');
+INSERT INTO `advertising` VALUES ('3', 'sl3', 'slideshow', null, null, '/uploads/slideshow/3.jpg', '#', '10', '1', '1', '1450754294', '1450754294');
+
+-- ----------------------------
+-- Table structure for `auth_assignment`
+-- ----------------------------
+DROP TABLE IF EXISTS `auth_assignment`;
+CREATE TABLE `auth_assignment` (
+  `item_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `user_id` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`item_name`,`user_id`),
+  CONSTRAINT `auth_assignment_ibfk_1` FOREIGN KEY (`item_name`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of auth_assignment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `auth_item`
+-- ----------------------------
+DROP TABLE IF EXISTS `auth_item`;
+CREATE TABLE `auth_item` (
+  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `type` int(11) NOT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `rule_name` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `data` text COLLATE utf8_unicode_ci,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`name`),
+  KEY `rule_name` (`rule_name`),
+  KEY `idx-auth_item-type` (`type`),
+  CONSTRAINT `auth_item_ibfk_1` FOREIGN KEY (`rule_name`) REFERENCES `auth_rule` (`name`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of auth_item
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `auth_item_child`
+-- ----------------------------
+DROP TABLE IF EXISTS `auth_item_child`;
+CREATE TABLE `auth_item_child` (
+  `parent` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `child` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`parent`,`child`),
+  KEY `child` (`child`),
+  CONSTRAINT `auth_item_child_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of auth_item_child
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `auth_rule`
+-- ----------------------------
+DROP TABLE IF EXISTS `auth_rule`;
+CREATE TABLE `auth_rule` (
+  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `data` text COLLATE utf8_unicode_ci,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of auth_rule
 -- ----------------------------
 
 -- ----------------------------
@@ -65,12 +144,20 @@ CREATE TABLE `category_post` (
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `idx_title_slug` (`title`,`slug`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `idx_title` (`title`) USING BTREE,
+  KEY `idx_slug` (`slug`),
+  KEY `idx_lft` (`lft`),
+  KEY `idx_lft_rgt` (`lft`,`rgt`),
+  KEY `idx_id_lft_rgt` (`id`,`lft`,`rgt`),
+  KEY `idx_parent_id` (`parent_id`),
+  KEY `idx_tree_lft` (`tree`,`lft`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of category_post
 -- ----------------------------
+INSERT INTO `category_post` VALUES ('1', null, '1', '1', '2', '0', 'Tin tức', 'tin-tuc', '', '', '', '', '', null, '10', null, null, '1', '1', '1450760543', '1450760543');
+INSERT INTO `category_post` VALUES ('2', null, '2', '1', '2', '0', 'Sự kiện', 'su-kien', '', '', '', '', '', null, '10', null, null, '1', '1', '1450760603', '1450765458');
 
 -- ----------------------------
 -- Table structure for `category_product`
@@ -99,12 +186,19 @@ CREATE TABLE `category_product` (
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `idx_title_slug` (`title`,`slug`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `idx_title` (`title`) USING BTREE,
+  KEY `idx_slug` (`slug`) USING BTREE,
+  KEY `idx_lft` (`lft`) USING BTREE,
+  KEY `idx_lft_rgt` (`lft`,`rgt`) USING BTREE,
+  KEY `idx_id_lft_rgt` (`id`,`lft`,`rgt`) USING BTREE,
+  KEY `idx_parent_id` (`parent_id`) USING BTREE,
+  KEY `idx_tree_lft` (`tree`,`lft`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of category_product
 -- ----------------------------
+INSERT INTO `category_product` VALUES ('1', null, '1', '1', '2', '0', 'Sản phẩm', 'san-pham', '', '', '', '', '', null, '10', null, null, '1', '1', '1450765903', '1450768865');
 
 -- ----------------------------
 -- Table structure for `migration`
@@ -121,6 +215,7 @@ CREATE TABLE `migration` (
 -- ----------------------------
 INSERT INTO `migration` VALUES ('m000000_000000_base', '1450684366');
 INSERT INTO `migration` VALUES ('m130524_201442_init', '1450684371');
+INSERT INTO `migration` VALUES ('m140506_102106_rbac_init', '1450726671');
 
 -- ----------------------------
 -- Table structure for `page`
@@ -143,7 +238,8 @@ CREATE TABLE `page` (
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `idx_title_slug` (`title`,`slug`)
+  KEY `idx_title` (`title`) USING BTREE,
+  KEY `idx_slug` (`slug`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
@@ -171,8 +267,9 @@ CREATE TABLE `post` (
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `idx_title_slug` (`title`,`slug`),
-  KEY `idx_category_id` (`category_id`)
+  KEY `idx_category_id` (`category_id`),
+  KEY `idx_title` (`title`) USING BTREE,
+  KEY `idx_slug` (`slug`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
@@ -206,8 +303,9 @@ CREATE TABLE `product` (
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `idx_title_slug` (`title`,`slug`),
-  KEY `idx_category_id` (`category_id`)
+  KEY `idx_category_id` (`category_id`),
+  KEY `idx_title` (`title`) USING BTREE,
+  KEY `idx_slug` (`slug`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------

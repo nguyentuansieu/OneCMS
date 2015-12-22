@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use mihaildev\elfinder\ElFinder;
+use mihaildev\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Page */
@@ -16,7 +18,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'content')->widget(CKEditor::className(), [
+        'editorOptions' => elFinder::ckeditorOptions(['elfinder'],['preset' => 'standard', 'entities' => false]),
+    ]) ?>
 
     <?= $form->field($model, 'meta_title')->textInput() ?>
 
@@ -24,21 +28,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'meta_description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'meta_params')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'published')->textInput() ?>
-
-    <?= $form->field($model, 'layouts')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'views')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'created_by')->textInput() ?>
-
-    <?= $form->field($model, 'updated_by')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?= $form->field($model, 'published')->textInput(['value' => 10]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

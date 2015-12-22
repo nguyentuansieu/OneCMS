@@ -5,7 +5,6 @@ namespace common\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
-use yii\behaviors\SluggableBehavior;
 /**
  * This is the model class for table "setting".
  *
@@ -30,12 +29,6 @@ class Setting extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'slug',
-                'slugAttribute' => 'slug',
-                'ensureUnique' => true,
-            ],
             [
                 'class' => TimestampBehavior::className(),
             ],

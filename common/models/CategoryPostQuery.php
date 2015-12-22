@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use creocoder\nestedsets\NestedSetsQueryBehavior;
+
 /**
  * This is the ActiveQuery class for [[CategoryPost]].
  *
@@ -14,7 +16,11 @@ class CategoryPostQuery extends \yii\db\ActiveQuery
         $this->andWhere('[[status]]=1');
         return $this;
     }*/
-
+    public function behaviors() {
+        return [
+            NestedSetsQueryBehavior::className(),
+        ];
+    }
     /**
      * @inheritdoc
      * @return CategoryPost[]|array

@@ -48,7 +48,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             [
                 'class' => SluggableBehavior::className(),
-                'attribute' => 'slug',
+                'attribute' => ['title', 'slug'],
                 'slugAttribute' => 'slug',
                 'ensureUnique' => true,
             ],
@@ -66,10 +66,13 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'title', 'image'], 'required'],
+            [['category_id', 'title', 'image', 'sku'], 'required'],
             [['category_id', 'quantity', 'price', 'discount', 'published', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
-            [['images', 'summary', 'content', 'meta_params', 'meta_title'], 'string'],
-            [['title', 'slug', 'image', 'meta_keywords', 'meta_description'], 'string', 'max' => 255],
+            [['images', 'summary', 'content', 'meta_params', 'specification'], 'string'],
+            [['title', 'slug', 'image', 'meta_keywords', 'download'], 'string', 'max' => 255],
+            [['meta_title'], 'string', 'max' => 70],
+            [['meta_description'], 'string', 'max' => 160],
+            [['video'], 'string', 'max' => 100],
             [['sku'], 'string', 'max' => 11],
         ];
     }
@@ -101,6 +104,8 @@ class Product extends \yii\db\ActiveRecord
             'updated_by' => Yii::t('backend', 'Updated By'),
             'created_at' => Yii::t('backend', 'Created At'),
             'updated_at' => Yii::t('backend', 'Updated At'),
+            'specification' => Yii::t('backend', 'Thông số kỹ thuật'),
+            'download' => Yii::t('backend', 'Tải về'),
         ];
     }
 

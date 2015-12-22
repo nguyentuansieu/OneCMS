@@ -36,6 +36,7 @@ use zhuravljov\widgets\DatePicker;
         ],
         'clientEvents' => [],
     ]) ?>
+
     <?= $form->field($model, 'image')->widget(InputFile::className(), [
         'language'      => 'en',
         'controller'    => 'elfinder',

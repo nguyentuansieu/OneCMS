@@ -42,7 +42,7 @@ class Page extends \yii\db\ActiveRecord
         return [
             [
                 'class' => SluggableBehavior::className(),
-                'attribute' => 'slug',
+                'attribute' => ['title', 'slug'],
                 'slugAttribute' => 'slug',
                 'ensureUnique' => true,
             ],
@@ -61,10 +61,12 @@ class Page extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['content', 'meta_title', 'meta_params'], 'string'],
+            [['content', 'meta_params'], 'string'],
             [['published', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
-            [['title', 'slug', 'meta_keywords', 'meta_description'], 'string', 'max' => 255],
+            [['title', 'slug', 'meta_keywords'], 'string', 'max' => 255],
             [['layouts', 'views'], 'string', 'max' => 100],
+            [['meta_title'], 'string', 'max' => 70],
+            [['meta_description'], 'string', 'max' => 160],
         ];
     }
 
