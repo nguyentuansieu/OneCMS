@@ -28,22 +28,33 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => 'One CMS',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Trang chủ', 'url' => ['/site/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'Đăng nhập', 'url' => ['/site/login']];
     } else {
+        $menuItems[] = ['label' => 'Nội dung', 'url' => ['/post/index'], 'items' => [
+            ['label' => 'Danh mục', 'url' => ['/category-post/index']],
+            ['label' => 'Bài viết', 'url' => ['/post/index']],
+            ['label' => 'Trang cố định', 'url' => ['/page/index']],
+        ]];
+        $menuItems[] = ['label' => 'Sản phẩm', 'url' => ['/product/index'], 'items' => [
+            ['label' => 'Danh mục', 'url' => ['/category-product/index']],
+            ['label' => 'Sản phẩm', 'url' => ['/product/index']],
+        ]];
+        $menuItems[] = ['label' => 'Quảng cáo', 'url' => ['/advertising/index']];
+        $menuItems[] = ['label' => 'Cấu hình', 'url' => ['/setting/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
+                'Thoát (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link']
             )
             . Html::endForm()
@@ -52,6 +63,8 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
+        'activateParents' => 'true',
+        'activateItems' => 'true',
     ]);
     NavBar::end();
     ?>
@@ -67,9 +80,9 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; OneCMS <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right">Phát triển bởi <a href="htp://hatinh.news">One CMS</a></p>
     </div>
 </footer>
 

@@ -23,7 +23,8 @@
         "mihaildev/yii2-elfinder": "^1.1",
         "mihaildev/yii2-ckeditor": "^1.0",
         "omnilight/yii2-shopping-cart": "^1.2",
-        "yii2mod/yii2-selectize": "dev-master"
+        "yii2mod/yii2-selectize": "dev-master",
+        "onecms/yii2-adminlte": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

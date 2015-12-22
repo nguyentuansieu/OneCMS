@@ -41,5 +41,20 @@ return [
 			],
         ],
     ],
+    'controllerMap' => [
+        'elfinder' => [
+            'class' => 'mihaildev\elfinder\Controller',
+            'access' => ['@'],
+            'disabledCommands' => ['netmount'],
+            'roots' => [
+                [
+                    'baseUrl' => '',
+                    'basePath' => '@frontend/web',
+                    'path' => 'uploads',
+                    'name' => 'Uploads'
+                ],
+            ],
+        ],
+    ],
     'params' => $params,
 ];

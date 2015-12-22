@@ -4,25 +4,71 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a87307c9cb505ad661744fe0fafe6e17",
-    "content-hash": "d4364bee3046fb4e5f116113e739dd82",
+    "hash": "74284cced9e5cf5cdcbe72d8fd6b50c6",
+    "content-hash": "afbaa97e23e227e710200da6d453da15",
     "packages": [
         {
-            "name": "bower-asset/bootstrap",
-            "version": "v3.3.6",
+            "name": "bower-asset/admin-lte",
+            "version": "v2.3.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "81df608a40bf0629a1dc08e584849bb1e43e0b7a"
+                "url": "https://github.com/almasaeed2010/AdminLTE.git",
+                "reference": "1ee281b3b99e8d8cccdc72fb8437c6888149cb46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/81df608a40bf0629a1dc08e584849bb1e43e0b7a",
-                "reference": "81df608a40bf0629a1dc08e584849bb1e43e0b7a",
+                "url": "https://api.github.com/repos/almasaeed2010/AdminLTE/zipball/1ee281b3b99e8d8cccdc72fb8437c6888149cb46",
+                "reference": "1ee281b3b99e8d8cccdc72fb8437c6888149cb46",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "index2.html",
+                    "dist/css/AdminLTE.css",
+                    "dist/js/app.js",
+                    "build/less/AdminLTE.less"
+                ],
+                "bower-asset-ignore": [
+                    "/.*",
+                    "node_modules",
+                    "bower_components",
+                    "composer.json",
+                    "documentation"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Admin dashboard and control panel template",
+            "keywords": [
+                "admin",
+                "backend",
+                "bootstrap",
+                "css",
+                "html",
+                "js",
+                "responsive",
+                "template",
+                "theme"
+            ]
+        },
+        {
+            "name": "bower-asset/bootstrap",
+            "version": "v3.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/bootstrap.git",
+                "reference": "16b48259a62f576e52c903c476bd42b90ab22482"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/16b48259a62f576e52c903c476bd42b90ab22482",
+                "reference": "16b48259a62f576e52c903c476bd42b90ab22482",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/jquery": ">=1.9.1,<=2"
+                "bower-asset/jquery": ">=1.9.1"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -57,17 +103,95 @@
             ]
         },
         {
-            "name": "bower-asset/jquery",
-            "version": "1.11.3",
+            "name": "bower-asset/fontawesome",
+            "version": "v4.5.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery.git",
-                "reference": "1472290917f17af05e98007136096784f9051fab"
+                "url": "https://github.com/FortAwesome/Font-Awesome.git",
+                "reference": "fddd2c240452e6c8990c4ef75e0265b455aa7968"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery/zipball/1472290917f17af05e98007136096784f9051fab",
-                "reference": "1472290917f17af05e98007136096784f9051fab",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/fddd2c240452e6c8990c4ef75e0265b455aa7968",
+                "reference": "fddd2c240452e6c8990c4ef75e0265b455aa7968",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "less/font-awesome.less",
+                    "scss/font-awesome.scss"
+                ],
+                "bower-asset-ignore": [
+                    "*/.*",
+                    "*.json",
+                    "src",
+                    "*.yml",
+                    "Gemfile",
+                    "Gemfile.lock",
+                    "*.md"
+                ]
+            },
+            "license": [
+                "OFL-1.1",
+                "MIT",
+                "CC-BY-3.0"
+            ],
+            "description": "Font Awesome"
+        },
+        {
+            "name": "bower-asset/ionicons",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/driftyco/ionicons.git",
+                "reference": "ecb4b806831005c25b97ed9089fbb1d7dcc0879c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/driftyco/ionicons/zipball/ecb4b806831005c25b97ed9089fbb1d7dcc0879c",
+                "reference": "ecb4b806831005c25b97ed9089fbb1d7dcc0879c",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "css/ionicons.css",
+                    "fonts/*"
+                ],
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "builder",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Ionicons - free and beautiful icons from the creators of Ionic Framework",
+            "keywords": [
+                "fonts",
+                "icon font",
+                "icons",
+                "ionic",
+                "web font"
+            ]
+        },
+        {
+            "name": "bower-asset/jquery",
+            "version": "2.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jquery/jquery.git",
+                "reference": "7751e69b615c6eca6f783a81e292a55725af6b85"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jquery/jquery/zipball/7751e69b615c6eca6f783a81e292a55725af6b85",
+                "reference": "7751e69b615c6eca6f783a81e292a55725af6b85",
                 "shasum": ""
             },
             "require-dev": {
@@ -558,6 +682,48 @@
             "time": "2015-09-08 11:18:44"
         },
         {
+            "name": "onecms/yii2-adminlte",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nguyentuansieu/yii2-adminlte.git",
+                "reference": "7944424341ddf6c178cc99db4fb4ef046ef901fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nguyentuansieu/yii2-adminlte/zipball/7944424341ddf6c178cc99db4fb4ef046ef901fa",
+                "reference": "7944424341ddf6c178cc99db4fb4ef046ef901fa",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/admin-lte": "^2.3",
+                "bower-asset/fontawesome": "^4.4",
+                "bower-asset/ionicons": "^2.0",
+                "bower-asset/jquery": "^2.1",
+                "yiisoft/yii2": "*"
+            },
+            "type": "library",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "onecms\\adminlte\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Nguyen Tuan Sieu",
+                    "email": "tuan@sieulog.com"
+                }
+            ],
+            "time": "2015-12-21 08:11:11"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "5.x-dev",
             "source": {
@@ -653,12 +819,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "91554ec5166e709d24c9a21cccf731bfb841421b"
+                "reference": "b00796744e1a0e72a0e89774756e37cd04c4d4a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/91554ec5166e709d24c9a21cccf731bfb841421b",
-                "reference": "91554ec5166e709d24c9a21cccf731bfb841421b",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/b00796744e1a0e72a0e89774756e37cd04c4d4a2",
+                "reference": "b00796744e1a0e72a0e89774756e37cd04c4d4a2",
                 "shasum": ""
             },
             "require": {
@@ -739,7 +905,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-12-17 05:13:41"
+            "time": "2015-12-21 08:27:06"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -747,12 +913,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-bootstrap.git",
-                "reference": "d841fe6f4767d2fdc24ebe91cc95a61b3465fd8f"
+                "reference": "7de7d5d63d655c0c69764f80f2dfc549e9b1d9f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/d841fe6f4767d2fdc24ebe91cc95a61b3465fd8f",
-                "reference": "d841fe6f4767d2fdc24ebe91cc95a61b3465fd8f",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/7de7d5d63d655c0c69764f80f2dfc549e9b1d9f0",
+                "reference": "7de7d5d63d655c0c69764f80f2dfc549e9b1d9f0",
                 "shasum": ""
             },
             "require": {
@@ -789,7 +955,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2015-12-15 10:17:51"
+            "time": "2015-12-19 19:45:57"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -1195,12 +1361,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-faker.git",
-                "reference": "42c1ca7621ecbf0a29eaaf479e9f7743e93899fd"
+                "reference": "186c77214e0a4b75f10380b4e6e5f82788922cb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/42c1ca7621ecbf0a29eaaf479e9f7743e93899fd",
-                "reference": "42c1ca7621ecbf0a29eaaf479e9f7743e93899fd",
+                "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/186c77214e0a4b75f10380b4e6e5f82788922cb7",
+                "reference": "186c77214e0a4b75f10380b4e6e5f82788922cb7",
                 "shasum": ""
             },
             "require": {
@@ -1234,7 +1400,7 @@
                 "faker",
                 "yii2"
             ],
-            "time": "2015-12-07 12:12:13"
+            "time": "2015-12-18 01:52:12"
         },
         {
             "name": "yiisoft/yii2-gii",
@@ -1242,12 +1408,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-gii.git",
-                "reference": "b94ed4fbb2afc9a8f165ee3cfef3e8df597d39e7"
+                "reference": "402902fee3e5b4073aa98b2baa0414c6f38e0818"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/b94ed4fbb2afc9a8f165ee3cfef3e8df597d39e7",
-                "reference": "b94ed4fbb2afc9a8f165ee3cfef3e8df597d39e7",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/402902fee3e5b4073aa98b2baa0414c6f38e0818",
+                "reference": "402902fee3e5b4073aa98b2baa0414c6f38e0818",
                 "shasum": ""
             },
             "require": {
@@ -1287,13 +1453,14 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2015-12-15 10:16:42"
+            "time": "2015-12-21 06:55:09"
         }
     ],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "yii2mod/yii2-selectize": 20
+        "yii2mod/yii2-selectize": 20,
+        "onecms/yii2-adminlte": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
