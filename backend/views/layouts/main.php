@@ -50,7 +50,7 @@ AppAsset::register($this);
             ['label' => 'Sản phẩm', 'url' => ['/product/index']],
         ]];
         $menuItems[] = ['label' => 'Quảng cáo', 'url' => ['/advertising/index']];
-        $menuItems[] = ['label' => 'Cấu hình', 'url' => ['/setting/index']];
+        $menuItems[] = ['label' => 'Cấu hình', 'url' => ['/settings/default/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

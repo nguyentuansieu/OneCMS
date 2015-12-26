@@ -24,7 +24,8 @@
         "mihaildev/yii2-ckeditor": "^1.0",
         "omnilight/yii2-shopping-cart": "^1.2",
         "yii2mod/yii2-selectize": "dev-master",
-        "onecms/yii2-adminlte": "dev-master"
+        "onecms/yii2-adminlte": "dev-master",
+        "sieulog/yii2-imagecache": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -1,0 +1,137 @@
+/*
+    Thumbelina Content Slider
+    V1.0 Rev 1302190900
+
+    A lightweight horizontal and vertical content slider designed for image thumbnails.
+    http://www.starplugins.com/thumbelina
+
+    Developed by Star Plugins
+    http://www.starplugins.com
+
+    Copyright 2013, Star Plugins
+    License: GNU General Public License, version 3 (GPL-3.0)
+    http://www.opensource.org/licenses/gpl-3.0.html
+*/
+
+/*
+    This style will be applied to the first list element (UL tag)
+    inside the container.
+    ### This should not require changing ###
+*/
+.thumbelina {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    position: absolute;
+    white-space: nowrap;
+    /* font-size:0 stop gaps between display-inline li elemets */
+    /* Either do this, or remove all white space in HTML beween li elements */
+    font-size: 0;
+
+    /* prevent annoying iPad cut/paste actions */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+}
+
+/* Style for the list items that surround the thumbnails */
+.thumbelina li {
+    padding: 5px;
+    line-height: 0px;
+    margin: 0px;
+}
+
+/* Add a border to the thumbnails. */
+.thumbelina li img {
+}
+
+/* Hover effect for the images */
+.thumbelina li img:hover {
+    cursor: pointer;
+}
+
+/*
+    Following is the CSS for the navigation buttons.
+    They are designed to fit flush on the ends of the slider
+    using absolute positioning, with the container as the parent element.
+    The sizes are set to match the demo slider.
+    You can change any of this as you wish - you don't even need to use these classes.
+    Position the buttons where you like on the page, change sizes, use images etc.
+    They don't have to be children of the container.
+*/
+
+/* Common style for the buttons */
+.thumbelina-but {
+    position: absolute;
+    z-index: 1;
+    cursor: pointer;
+    /* Font related items for the symbols used on buttons */
+    /* Obviously not needed if you're just using images */
+    color: #888;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+/* Hover style for active button */
+.thumbelina-but:hover {
+    color: #fff;
+}
+
+/* Disabled style when button is not active due to extents being reached. */
+/* You could do other things e.g. make buttons dissapear completely. */
+.thumbelina-but.disabled,
+.thumbelina-but.disabled:hover {
+    color: #ccc;
+    cursor: default;
+    box-shadow: none;
+}
+
+/* Horizontal buttons. */
+.thumbelina-but.horiz {
+    width: 20px;
+    height: 119px;
+    line-height: 119px;
+    top: -1px;
+
+}
+
+/* Left edge button. */
+.thumbelina-but.horiz.left {
+    left: -22px;
+    border-radius: 5px 0px 0px 5px;
+}
+
+/* Right edge button */
+.thumbelina-but.horiz.right {
+    right: -22px;
+    border-radius: 0px 5px 5px 0px;
+}
+
+/* Vertical buttons. */
+.thumbelina-but.vert {
+    left: -1px;
+    height: 25px;
+    line-height: 25px;
+    width: 103%;
+    z-index: 99;
+    background-color: #f9f9f9;
+    border-left:1px solid #f9f9f9;
+    border-right:1px solid #f9f9f9;
+    background-repeat: no-repeat;
+}
+
+/* Top edge button. */
+.thumbelina-but.vert.top {
+    top: -22px;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEwMCAxMDAiIGlkPSJMYXllcl8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB4bWw6c3BhY2U9InByZXNlcnZlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48cG9seWdvbiBmaWxsPSIjMDEwMTAxIiBwb2ludHM9IjIyLjQsNjQuMSA1MC44LDM2LjUgNzkuMyw2NC4xIDgwLjgsNjMuMiA1MC44LDM0LjEgMjAuOCw2My4yIDIyLjQsNjQuMSAiLz48L3N2Zz4=);
+    background-position: top center;
+}
+
+/* Bottom edge button. */
+.thumbelina-but.vert.bottom {
+    bottom: -22px;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEwMCAxMDAiIGlkPSJMYXllcl8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB4bWw6c3BhY2U9InByZXNlcnZlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48cG9seWdvbiBmaWxsPSIjMDEwMTAxIiBwb2ludHM9IjIzLjEsMzQuMSA1MS41LDYxLjcgODAsMzQuMSA4MS41LDM1IDUxLjUsNjQuMSAyMS41LDM1IDIzLjEsMzQuMSAiLz48L3N2Zz4=);
+    background-position: bottom center;
+}

@@ -6,9 +6,26 @@ a, a:hover, a:focus, a:active {
     text-decoration: none;
 }
 .onecms-header {
-    background-color: #f1f1f1;
+    background-color: #78BA4D;
+    border-width: 0;
 }
 
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    background-color: #ffab00;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > li > a {
+    color: rgb(255, 255, 255);
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #ffab00;
+}
 .onecms-header .navbar-brand {
     height: 60px;
     padding: 10px 15px;
@@ -29,9 +46,11 @@ a, a:hover, a:focus, a:active {
     margin-top: 12px;
     margin-bottom: 12px;
 }
-.onecms-header .onecms-hotline .btn {
+.onecms-header .onecms-hotline .btn.btn-danger {
     font-size: 20px;
     font-weight: bold;
+    background-color: #F19007;
+    border-color: #FFB13B;
 }
 .wrap {
     min-height: 100%;
@@ -44,11 +63,14 @@ a, a:hover, a:focus, a:active {
 }
 
 .footer {
-    height: 60px;
     background-color: #f5f5f5;
     border-top: 1px solid #ddd;
     padding-top: 20px;
     margin-top: 20px;
+    background: rgba(247,247,247,.5);
+    -webkit-box-shadow: 0 -1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 -1px 2px rgba(0,0,0,.2);
+    padding-bottom: 20px;
 }
 
 .jumbotron {
@@ -359,3 +381,32 @@ a.desc:after {
     font-size: 30px;
     font-weight: bold;
 }
+
+#product_images {
+    position:relative;
+    width:93px;
+    height:300px;
+    border-left:1px solid #f9f9f9;
+    border-right:1px solid #f9f9f9;
+    margin-top: 22px;
+    margin-bottom: 22px;
+}
+
+.product_images_thumb,
+.product_images_large {
+    display: inline-block;
+    float: left;
+}
+.product_images_large {
+    margin-left: 5px;
+}
+
+.product_images_thumb {
+    width:95px;
+}
+
+.product_images_large {
+    width:357px;
+}
+
+.flink a {color: #333;}

@@ -21,10 +21,12 @@ class AppAsset extends AssetBundle
         'css/owl.carousel.css',
         'css/owl.transitions.css',
         'css/owl.theme.css',
+        'css/thumbelina.css',
         'css/site.css',
     ];
     public $js = [
-        'js/owl.carousel.min.js'
+        'js/owl.carousel.min.js',
+        'js/thumbelina.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

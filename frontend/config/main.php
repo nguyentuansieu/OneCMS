@@ -37,6 +37,49 @@ return [
             'showScriptName' => false,
             'rules' => [
 				'/' => 'site/index',
+                'lien-he' => 'site/contact',
+                'thumbs/<path:.*>' => 'site/thumb',
+                [
+                    'pattern' => 'san-pham',
+                    'route' => 'product/index',
+                    'suffix' => ''
+                ],
+                [
+                    'pattern' => 'san-pham/<slug:[\w\-]+>',
+                    'route' => 'product/view',
+                    'suffix' => '.html'
+                ],
+                [
+                    'pattern' => 'san-pham/<slug:[\w\-]+>',
+                    'route' => 'category-product/view',
+                    'suffix' => ''
+                ],
+                [
+                    'pattern' => '<slug:[\w\-]+>',
+                    'route' => 'category-post/view',
+                    'suffix' => ''
+                ],
+                [
+                    'pattern' => '<cslug:[\w\-]+>/<slug:[\w\-]+>',
+                    'route' => 'post/view',
+                    'suffix' => '.html'
+                ],
+                [
+                    'pattern' => '<slug:[\w\-]+>',
+                    'route' => 'page/view',
+                    'suffix' => '.html',
+                ],
+            ],
+        ],
+        'imageCache' => [
+            'class' => 'iutbay\yii2imagecache\ImageCache',
+            'sourcePath' => '@app/web/uploads',
+            'sourceUrl' => '@web/uploads',
+            'thumbsPath' => '@app/web/thumbs',
+            'thumbsUrl' => '@web/thumbs',
+            'sizes' => [
+                'post' => [600, 250],
+                'postFontThumb' => [150,60],
             ],
         ],
     ],

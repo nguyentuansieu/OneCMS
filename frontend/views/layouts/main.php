@@ -34,16 +34,16 @@ AppAsset::register($this);
             'class' => 'navbar-default onecms-header navbar-fixed-top',
         ],
     ]);
-    echo '<div class="navbar-form onecms-hotline navbar-right">
+    echo '<div class="navbar-form onecms-hotline navbar-right hidden-xs hidden-sm">
             <button class="btn btn-danger">0943 668 716</button>
           </div>
         ';
     $menuItems = [
         ['label' => 'Trang chủ', 'url' => ['/site/index']],
-        ['label' => 'Giới thiệu', 'url' => ['/site/about']],
-        ['label' => 'Sản phẩm', 'url' => ['/product/index']],
-        ['label' => 'Blogs', 'url' => ['/blog/index']],
-        ['label' => 'Liên hệ', 'url' => ['/site/contact']],
+        ['label' => 'Giới thiệu', 'url' => ['/page/view', 'slug' => 'gioi-thieu']],
+//        ['label' => 'Sản phẩm', 'url' => ['/product/index']],
+        ['label' => 'Blogs', 'url' => ['/category-post/view', 'slug' => 'tin-tuc']],
+        ['label' => 'Liên hệ', 'url' => ['/page/view', 'slug' => 'lien-he']],
     ];
     if (!Yii::$app->user->isGuest)
     {
@@ -57,6 +57,8 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'onecms-nav navbar-nav navbar-right'],
         'items' => $menuItems,
+        'activateParents' => 'true',
+        'activateItems' => 'true',
     ]);
 
     NavBar::end();
@@ -73,13 +75,28 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <div class="row">
+            <div class="col-lg-3">
+                <h4>Hỗ trợ khách hàng</h4>
+                <ul class="flink list-unstyled">
+                    <li><?=Html::a('Các câu hỏi thường gặp', '#'); ?></li>
+                    <li><?=Html::a('Hướng dẫn đặt hàng', '#'); ?></li>
+                    <li><?=Html::a('Phương thức vẫn chuyển', '#'); ?></li>
+                    <li><?=Html::a('Chính sách đổi trả', '#'); ?></li>
+                </ul>
+                <?=Html::img('/img/s1.png', ['class' => 'img-responsive']); ?>
+            </div>
+            <div class="col-lg-5">
+                <?=\common\onecms\FrontPostWidget::widget(); ?>
+            </div>
+            <div class="col-lg-4">
+                <div class="fb-page" data-href="https://www.facebook.com/facebook" data-tabs="timeline, events, messages" data-height="350" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/facebook"><a href="https://www.facebook.com/facebook">Facebook</a></blockquote></div></div>
+            </div>
+        </div>
     </div>
 </footer>
 <a class="back-to-top" style="display: inline;"><i class="fa fa-angle-up"></i></a>
-
+<div id="fb-root"></div>
 <?php
 $js = "
 jQuery(document).ready(function() {
@@ -100,6 +117,13 @@ scrollTop: 0
 return false;
 })
 });
+(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = \"//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.5&appId=1684267261791569\";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
 ";
 $this->registerJs($js, 3);
 ?>
